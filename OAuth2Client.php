@@ -21,7 +21,7 @@ class OAuth2ClientHooks {
 	public static function onPersonalUrls( array &$personal_urls, Title $title ) {
 
 		global $wgOAuth2Client, $wgUser, $wgRequest;
-		if( $wgUser->isLoggedIn() ) return true;
+		if( $wgUser->isRegistered() ) return true;
 
 
 		# Due to bug 32276, if a user does not have read permissions,
