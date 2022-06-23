@@ -136,11 +136,13 @@ class SpecialOAuth2Client extends SpecialPage {
 	}
 
 	private function _default(){
-		global $wgOAuth2Client, $wgOut, $wgUser, $wgScriptPath, $wgExtensionAssetsPath;
+		global $wgOAuth2Client, $wgOut, $wgScriptPath, $wgExtensionAssetsPath;
+
 		$service_name = ( isset( $wgOAuth2Client['configuration']['service_name'] ) && 0 < strlen( $wgOAuth2Client['configuration']['service_name'] ) ? $wgOAuth2Client['configuration']['service_name'] : 'OAuth2' );
 
 		$wgOut->setPagetitle( wfMessage( 'oauth2client-login-header', $service_name)->text() );
-		if ( !$wgUser->isRegistered() ) {
+		$user = RequestContext::getMain()->getUser();
+		if ( !$user->isRegistered() ) {
 			$wgOut->addWikiMsg( 'oauth2client-you-can-login-to-this-wiki-with-oauth2', $service_name );
 			$wgOut->addWikiMsg( 'oauth2client-login-with-oauth2', $this->getTitle( 'redirect' )->getPrefixedURL(), $service_name );
 
@@ -197,8 +199,7 @@ class SpecialOAuth2Client extends SpecialPage {
 		$user->setCookies();
 		$this->getContext()->setUser( $user );
 		$user->saveSettings();
-		global $wgUser;
-		$wgUser = $user;
+		RequestContext::getMain()->setUser( $user );
 		$sessionUser = User::newFromSession($this->getRequest());
 		$sessionUser->load();
 		return $user;

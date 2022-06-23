@@ -20,8 +20,10 @@ if ( !defined( 'MEDIAWIKI' ) ) {
 class OAuth2ClientHooks {
 	public static function onPersonalUrls( array &$personal_urls, Title $title ) {
 
-		global $wgOAuth2Client, $wgUser, $wgRequest;
-		if( $wgUser->isRegistered() ) return true;
+		global $wgOAuth2Client, $wgRequest;
+
+        $user = RequestContext::getMain()->getUser();
+		if( $user->isRegistered() ) return true;
 
 
 		# Due to bug 32276, if a user does not have read permissions,
