@@ -1,0 +1,13 @@
+{
+	"oauth2client": "OAuth2客户端",
+	"oauth2client-act-as-a-client-to-any-oauth2-server": "充当任何OAuth2服务器的客户端",
+	"oauth2client-couldnotconnect": "无法连接至OAuth2服务器",
+	"oauth2client-header-link-text": "$1登录",
+	"oauth2client-login-header": "$1登录",
+	"oauth2client-you-can-login-to-this-wiki-with-oauth2": "您可以使用您的$1账户登录本wiki",
+	"oauth2client-login-with-oauth2": "[[$1|使用$2登录]]",
+	"oauth2client-youre-already-loggedin": "您已经登录。",
+	"oauth2client-logout-header": "$1登出",
+	"oauth2client-logged-out": "您已登出本wiki。",
+	"oauth2client-login-with-oauth2-again": "[[$1|您可以用您的$2账户重新登录]]"
+}
