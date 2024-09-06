@@ -176,7 +176,7 @@ class SpecialOAuth2Client extends SpecialPage {
 
 		$username = JsonHelper::extractValue($response, $wgOAuth2Client['configuration']['username']);
 		$email =  JsonHelper::extractValue($response, $wgOAuth2Client['configuration']['email']);
-		Hooks::run("OAuth2ClientBeforeUserSave", [&$username, &$email, $response]);
+		MediaWiki\MediaWikiServices::getInstance()->getHookContainer()->run("OAuth2ClientBeforeUserSave", [&$username, &$email, $response]);
 		$user = User::newFromName($username, 'creatable');
 		if (!$user) {
 			throw new MWException('Could not create user with username:' . $username);
