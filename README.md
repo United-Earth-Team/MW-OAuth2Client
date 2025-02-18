@@ -75,6 +75,7 @@ $wgOAuth2Client['configuration']['scopes'] = 'read_citizen_info'; //Permissions
 
 $wgOAuth2Client['configuration']['service_name'] = 'Citizen Registry'; // the name of your service
 $wgOAuth2Client['configuration']['service_login_link_text'] = 'Login with StarMade'; // the text of the login link
+$wgOAuth2Client['configuration']['remember_me'] = true; // Whether to keep user logged in for longer, similarly to what would happen if they checked "Keep me logged in" in password-based login. See https://www.mediawiki.org/wiki/Manual:$wgCookieExpiration . Default: false.
 
 ```
 
