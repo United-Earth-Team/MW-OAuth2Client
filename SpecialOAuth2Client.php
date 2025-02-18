@@ -92,7 +92,7 @@ class SpecialOAuth2Client extends SpecialPage {
 	}
 
 	private function _handleCallback(){
-		global $wgRequest;
+		global $wgRequest, $wgOAuth2Client;
 
 		try {
 			$storedState = $wgRequest->getSession()->get('oauth2state');
@@ -117,7 +117,8 @@ class SpecialOAuth2Client extends SpecialPage {
 
 		$resourceOwner = $this->_provider->getResourceOwner($accessToken);
 		$user = $this->_userHandling( $resourceOwner->toArray() );
-		$user->setCookies();
+		$rememberMe = $wgOAuth2Client['configuration']['remember_me'] ?? false;
+		$user->setCookies(null, null, $rememberMe);
 
 		global $wgOut, $wgRequest;
 		$title = null;
@@ -196,7 +197,8 @@ class SpecialOAuth2Client extends SpecialPage {
 
 		// Setup the session
 		$wgRequest->getSession()->persist();
-		$user->setCookies();
+		$rememberMe = $wgOAuth2Client['configuration']['remember_me'] ?? false;
+		$user->setCookies(null, null, $rememberMe);
 		$this->getContext()->setUser( $user );
 		$user->saveSettings();
 		RequestContext::getMain()->setUser( $user );
